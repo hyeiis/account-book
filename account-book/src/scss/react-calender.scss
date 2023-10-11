@@ -1,0 +1,56 @@
+@import "react-calendar/dist/Calendar.css";
+
+.react-calendar {
+  width: 80%;
+  // height: 30%;
+  height: fit-content;
+  border: none;
+}
+
+// 달력 상단 년/월 글씨 커스텀
+.react-calendar__navigation__label > span {
+  color: var(--festie-gray-800, #3a3a3a);
+  font-family: SUIT Variable;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 140%;
+}
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: white;
+}
+
+// 주말 빨간 색상 없애기
+.react-calendar__month-view__days__day--weekend {
+  color: var(--festie-gray-800, #3a3a3a);
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #9e9e9e;
+}
+
+// 현재 날짜가 달력에 표시될 때
+.react-calendar__tile--now {
+  background: #6b9371b3;
+  color: #fafafa;
+}
+
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: #7cb384b3;
+  color: #fafafa;
+}
+
+// day 타일 하나하나
+.react-calendar__tile {
+  border-radius: 5px;
+  text-align: center;
+}
+.react-calendar__tile--active {
+  background: #7cb384b3;
+  color: white;
+}
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: #7cb384b3;
+}

@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ADD_EXPENSE, CLEAR_FORM } from "../store/expense-store";
 import ClearIcon from "@mui/icons-material/Clear";
-import { addComma, deleteComma } from "../util/numberUtils";
+import { addComma, deleteComma } from "../util/_numberUtils";
 import "../scss/expenseForm.scss";
 
 export default function ExpenseForm({ onSubmit, onClear }) {
@@ -12,7 +12,6 @@ export default function ExpenseForm({ onSubmit, onClear }) {
   const [isEnteredWrongAmount, setIsEnteredWrongAmount] = useState(false);
   const [expenseType, setExpenseType] = useState("income");
   const dispatch = useDispatch();
-  // const isEnteredWrongAmount = useSelector((state) => state.isEnteredWrongAmount);  // Redux 스토어에서 상태 가져오기
 
   const getDate = useCallback(() => {
     return new Date().toISOString().substring(0, 10);
@@ -32,7 +31,15 @@ export default function ExpenseForm({ onSubmit, onClear }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const enteredData = {};
+    const enteredData = {
+      date,
+      title,
+      amount: parseFloat(deleteComma(amount)),
+      amountType: expenseType,
+    };
+
+    dispatch({ type: ADD_EXPENSE, expense: enteredData });
+
     setDate("");
     setTitle("");
     setAmount("");

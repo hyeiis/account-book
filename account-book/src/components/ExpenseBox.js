@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { addComma } from "../util/numberUtils";
+import { addComma } from "../util/_numberUtils";
 // import { FilterContext } from "./PocketContainer";
 import "../scss/expenseBox.scss";
 

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ADD_EXPENSE, CLEAR_FORM } from "./store/expense-store";
+import { ADD_EXPENSE, CLEAR_FORM } from "../store/expense-store";
 import ClearIcon from "@mui/icons-material/Clear";
 import { addComma, deleteComma } from "../util/numberUtils";
 import "../scss/expenseForm.scss";

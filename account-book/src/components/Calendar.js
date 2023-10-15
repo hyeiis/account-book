@@ -3,7 +3,7 @@ import Calendar from "react-calendar";
 import moment from "moment";
 import PrevIcon from "@mui/icons-material/NavigateBefore";
 import NextIcon from "@mui/icons-material/NavigateNext";
-import "../scss/react-calender.scss";
+import "../scss/react-calendar.scss";
 
 export default function CalendarCustom() {
   const [date, setDate] = useState(new Date());

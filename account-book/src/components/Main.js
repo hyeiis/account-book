@@ -1,8 +1,8 @@
-import "../scss/react-calender.scss";
+// import "../scss/react-calender.scss";
 import "../scss/main.scss";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ADD_EXPENSE, REMOVE_EXPENSE } from "./store/expense-store"; // Redux에서 사용할 액션 타입 가져오기
+import { ADD_EXPENSE, REMOVE_EXPENSE } from "../store/expense-store"; // Redux에서 사용할 액션 타입 가져오기
 import CalendarCustom from "./Calendar";
 import ExpenseBox from "./ExpenseBox";
 import ExpenseForm from "./ExpenseForm";

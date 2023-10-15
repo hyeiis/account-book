@@ -1,5 +1,3 @@
-// import "../scss/react-calender.scss";
-import "../scss/main.scss";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ADD_EXPENSE, REMOVE_EXPENSE } from "../store/expense-store"; // Redux에서 사용할 액션 타입 가져오기
@@ -8,6 +6,7 @@ import ExpenseBox from "./ExpenseBox";
 import ExpenseForm from "./ExpenseForm";
 import MonthHistory from "./MonthHistory";
 import DayHistory from "./DaysHistory";
+import "../scss/main.scss";
 
 export default function Main() {
   const [income, setIncome] = useState(0); // 수입
@@ -15,9 +14,6 @@ export default function Main() {
   const [displayCase, setDisplayCase] = useState(0);
 
   const dispatch = useDispatch();
-  // const displayCase = useSelector((state) => state.displayCase);  // Redux 스토어에서 상태 가져오기
-
-  // ...
 
   const handleClear = () => {
     setDisplayCase(0);

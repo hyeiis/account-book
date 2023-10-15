@@ -8,9 +8,9 @@ const reducer = (state = [], action) => {
   console.log(action);
   switch (action.type) {
     case ADD_EXPENSE:
-      return;
+      return [...state, action.expense];
     case REMOVE_EXPENSE:
-      return;
+      return state.filter((expense) => expense.id !== action.id);
     default:
       return state;
   }

@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { ADD_EXPENSE, CLEAR_FORM } from "../store/expense-store";
+import { useDispatch } from "react-redux";
+import "react-datepicker/dist/react-datepicker.css";
+import { ADD_EXPENSE } from "../store/expense-store";
 import ClearIcon from "@mui/icons-material/Clear";
 import { addComma, deleteComma } from "../util/_numberUtils";
 import "../scss/expenseForm.scss";
@@ -57,7 +58,6 @@ export default function ExpenseForm({ onSubmit, onClear }) {
           }}
         />
       </div>
-      <hr />
       <form onSubmit={handleSubmit}>
         <div className="main">
           <label>날짜</label>
@@ -70,6 +70,7 @@ export default function ExpenseForm({ onSubmit, onClear }) {
             max={getDate()}
             required
           />
+
           <br />
           <label>제목</label>
           <input

@@ -1,51 +1,41 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { addComma } from "../util/_numberUtils";
-// import { FilterContext } from "./PocketContainer";
 import "../scss/expenseBox.scss";
+import { useSelector } from "react-redux";
 
 export default function ExpenseBox() {
-  const [totalBalance, setTotalBalance] = useState(0);
-  const [totalIncome, setTotalIncome] = useState(0);
-  const [totalExpense, setTotalExpense] = useState(0);
+  const expenses = useSelector((state) => state || []);
 
-  useEffect(
-    () => {
-      let total = { balance: 0, income: 0, expense: 0 };
+  // 수입과 지출을 계산합니다
+  const totalIncome = expenses
+    .filter((expense) => expense.amountType === "income")
+    .reduce((total, expense) => total + expense.amount, 0);
 
-      // if (filteredItems.length > 0) {
-      //   // 자산, 수입, 지출 합계 계산
-      //   filteredItems.forEach((item) => {
-      //     if (item.amountType === "income") {
-      //       total.balance += +item.amount;
-      //       total.income += +item.amount;
-      //     } else {
-      //       total.balance -= +item.amount;
-      //       total.expense += +item.amount;
-      //     }
-      //   });
-      // }
+  const totalExpense = expenses
+    .filter((expense) => expense.amountType === "expense")
+    .reduce((total, expense) => total + expense.amount, 0);
 
-      setTotalBalance(total.balance);
-      setTotalIncome(total.income);
-      setTotalExpense(total.expense);
-    },
-    //  [filteredItems]
-  );
+  const totalBalance = totalIncome - totalExpense;
 
   return (
     <div className="budget__status">
       <div className="budget__status-title">
+        <h4>이번 달 현황</h4>
         <strong>{addComma(totalBalance.toString())}원</strong>
       </div>
 
       <div className="budget__status-detail">
         <div className="budget__status-detail--desc">
           <span>수입</span>
-          <strong>{addComma(totalIncome.toString())}원</strong>
+          <strong className="income_strong">
+            {addComma(totalIncome.toString())}원
+          </strong>
         </div>
         <div className="budget__status-detail--desc">
           <span>지출</span>
-          <strong>{addComma(totalExpense.toString())}원</strong>
+          <strong className="expense_strong">
+            {addComma(totalExpense.toString())}원
+          </strong>
         </div>
       </div>
     </div>

@@ -2,14 +2,24 @@
 
 .budget__status {
   width: 75%;
+  height: 20%;
   font-family: GmarketSansMedium;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
+
 .budget__status-title {
   display: flex;
   flex-flow: column;
   justify-content: center;
   font-size: 20px;
-  margin-bottom: 15px;
+
+  h4 {
+    margin-top: 0;
+    margin-bottom: 1vh;
+    font-size: 1.2vw;
+  }
 }
 
 .budget__status-detail {
@@ -17,6 +27,22 @@
   padding: 15px 0;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+  span {
+    color: gray;
+    font-size: 120%;
+  }
+
+  strong {
+    font-size: 130%;
+  }
+
+  .income_strong {
+    color: green;
+  }
+  .expense_strong {
+    color: red;
+  }
 }
 
 .budget__status-detail::before {

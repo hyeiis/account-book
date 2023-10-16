@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { REMOVE_EXPENSE, UPDATE_EXPENSE } from "../store/expense-store";
 import { addComma } from "../util/_numberUtils";
+import "../scss/daysHistory.scss";
 
 export default function DaysHistory({ selectedDate }) {
   const expenses = useSelector((state) => state || []);
+  const [filteredExpenses, setFilteredExpenses] = useState([]);
   const dispatch = useDispatch();
 
-  const filteredExpenses = expenses.filter(
-    (expense) => expense.date === selectedDate,
-  );
+  useEffect(() => {
+    const correctedDate = new Date(selectedDate);
+    correctedDate.setDate(selectedDate.getDate() + 1);
+
+    const filtered = expenses.filter(
+      (expense) =>
+        expense.date === correctedDate.toISOString().substring(0, 10),
+    );
+    setFilteredExpenses(filtered);
+  }, [selectedDate, expenses]);
 
   const totalIncome = filteredExpenses
     .filter((expense) => expense.amountType === "income")
@@ -23,11 +32,7 @@ export default function DaysHistory({ selectedDate }) {
     dispatch({ type: REMOVE_EXPENSE, id });
   };
 
-  const handleEditExpense = (id) => {
-    // Implement edit functionality here
-  };
-
-  const handleUpdateExpense = (id, updatedExpense) => {
+  const handleEditExpense = (id, updatedExpense) => {
     dispatch({ type: UPDATE_EXPENSE, id, updatedExpense });
   };
 

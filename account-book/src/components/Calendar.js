@@ -5,24 +5,16 @@ import PrevIcon from "@mui/icons-material/NavigateBefore";
 import NextIcon from "@mui/icons-material/NavigateNext";
 import "../scss/react-calendar.scss";
 
-export default function CalendarCustom({ onDateChange }) {
-  const [date, setDate] = useState(new Date());
-
-  const handleDateChange = (newDate) => {
-    setDate(newDate);
-    onDateChange(newDate);
-  };
-
+export default function CalendarCustom({ selectedDate, onDateChange }) {
   const handleDateClick = (clickedDate) => {
-    onDateChange(clickedDate);
+    onDateChange(clickedDate); // 날짜를 선택할 때도 부모 컴포넌트로 전달
   };
 
   return (
     <Calendar
       calendarType="gregory"
-      // onChange={setDate}
-      onChange={handleDateChange}
-      value={date}
+      onChange={(newDate) => onDateChange(newDate)}
+      value={selectedDate}
       // '일' 문자 없앰
       formatDay={(locale, date) => moment(date).format("D")}
       // 달 이동 버튼 변경

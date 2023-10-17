@@ -55,7 +55,7 @@ export default function Main() {
         <div className="main-box">
           <CalendarCustom
             className="calendar"
-            onDateChange={setSelectedDate}
+            onDateChange={handleDateChange}
             selectedDate={selectedDate}
           />
           <ExpenseBox

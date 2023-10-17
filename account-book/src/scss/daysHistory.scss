@@ -10,6 +10,9 @@
     margin-top: 1.5vh;
     display: flex;
     flex-direction: column;
+    padding-bottom: 2vh;
+    margin-bottom: 2vh;
+    border-bottom: 1px solid grey;
 
     &__item {
       display: flex;

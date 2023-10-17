@@ -30,6 +30,7 @@ export default function Main() {
 
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
+    setDisplayCase(0);
   };
 
   useEffect(() => {

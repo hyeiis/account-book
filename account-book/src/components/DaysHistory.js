@@ -29,6 +29,11 @@ export default function DaysHistory({ selectedDate }) {
     .reduce((total, expense) => total + expense.amount, 0);
 
   const handleRemoveExpense = (id) => {
+    const updatedExpenses = filteredExpenses.filter(
+      (expense) => expense.id !== id,
+    );
+    setFilteredExpenses(updatedExpenses);
+
     dispatch({ type: REMOVE_EXPENSE, id });
   };
 
@@ -50,7 +55,6 @@ export default function DaysHistory({ selectedDate }) {
         </div>
       </div>
       <div className="expense-list">
-        {filteredExpenses.length > 0 && <hr />}
         {filteredExpenses.map((expense) => (
           <div key={expense.id} className="expense-item">
             <span>{expense.title}</span>

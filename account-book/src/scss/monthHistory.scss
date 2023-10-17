@@ -3,22 +3,33 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 80%;
-  height: 97%;
-}
+  height: 95%;
 
-.top {
-  height: 10%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5vh;
-  h2 {
-    margin: 0;
-    margin-top: 0.35em;
-    padding: 0;
+  .top {
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5vh;
+    h2 {
+      margin: 0;
+      margin-top: 0.35em;
+      padding: 0;
+    }
   }
-}
 
-.x-icon {
-  cursor: pointer;
+  .main {
+    margin-bottom: 1.5vh;
+    overflow-y: auto; /* 스크롤이 필요한 경우에만 스크롤이 표시됨 */
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+  }
+
+  .x-icon {
+    cursor: pointer;
+  }
 }

@@ -60,39 +60,42 @@ export default function ExpenseForm({ onSubmit, onClear }) {
       </div>
       <form onSubmit={handleSubmit}>
         <div className="main">
-          <label>날짜</label>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => {
-              setDate(e.target.value);
-            }}
-            max={getDate()}
-            required
-          />
+          <div>
+            <label>날짜</label>
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+              max={getDate()}
+              required
+            />
+          </div>
+          <div>
+            <label>제목</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+              required
+            />
+          </div>
 
-          <br />
-          <label>제목</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-            required
-          />
-          <br />
-          <label>금액</label>
-          <input
-            type="text" // type 변경
-            value={amount}
-            onChange={(e) => {
-              handleAmount(e);
-            }}
-            maxLength={10}
-            required
-          />
-          <br />
+          <div>
+            <label>금액</label>
+            <input
+              type="text" // type 변경
+              value={amount}
+              onChange={(e) => {
+                handleAmount(e);
+              }}
+              maxLength={10}
+              required
+            />
+          </div>
           <div className="type">
             <label>수입</label>
             <input

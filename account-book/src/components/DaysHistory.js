@@ -39,32 +39,39 @@ export default function DaysHistory({ selectedDate }) {
   return (
     <div className="day-history">
       <div className="day-summary">
+        <h2>{selectedDate.getDate()}일</h2>
         <div className="day-summary__item">
-          <span>수입:</span>
-          <span>{addComma(totalIncome.toString())}원</span>
+          <h4>수입:</h4>
+          <h4 className="income">{addComma(totalIncome.toString())}원</h4>
         </div>
         <div className="day-summary__item">
-          <span>지출:</span>
-          <span>{addComma(totalExpense.toString())}원</span>
+          <h4>지출:</h4>
+          <h4 className="expense">{addComma(totalExpense.toString())}원</h4>
         </div>
       </div>
-      {filteredExpenses.map((expense) => (
-        <div key={expense.id} className="expense-item">
-          <span>{expense.date}</span>
-          <span>{addComma(expense.amount.toString())}원</span>
-          <span>{expense.title}</span>
-          <button
-            onClick={() => handleEditExpense(expense.id)}
-            className="edit-button">
-            수정
-          </button>
-          <button
-            onClick={() => handleRemoveExpense(expense.id)}
-            className="remove-button">
-            삭제
-          </button>
-        </div>
-      ))}
+      <div className="expense-list">
+        {filteredExpenses.length > 0 && <hr />}
+        {filteredExpenses.map((expense) => (
+          <div key={expense.id} className="expense-item">
+            <span>{expense.title}</span>
+            <span>{addComma(expense.amount.toString())}원</span>
+
+            <div>
+              <button
+                onClick={() => handleEditExpense(expense.id)}
+                className="edit-button">
+                수정
+              </button>
+              &nbsp;
+              <button
+                onClick={() => handleRemoveExpense(expense.id)}
+                className="remove-button">
+                삭제
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

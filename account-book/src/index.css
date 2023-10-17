@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgba(107, 147, 113, 0.7);
+  overflow: hidden;
 }
 
 code {

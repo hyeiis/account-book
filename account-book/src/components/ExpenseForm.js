@@ -1,13 +1,12 @@
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import "react-datepicker/dist/react-datepicker.css";
 import { ADD_EXPENSE } from "../store/expense-store";
 import ClearIcon from "@mui/icons-material/Clear";
 import { enteredOnlyNumber, addComma, deleteComma } from "../util/_numberUtils";
 import { generateUniqueId } from "../util/generateUniqueId";
 import "../scss/expenseForm.scss";
 
-export default function ExpenseForm({ onSubmit, onClear }) {
+export default function ExpenseForm({ onClear }) {
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
@@ -15,10 +14,12 @@ export default function ExpenseForm({ onSubmit, onClear }) {
   const [expenseType, setExpenseType] = useState("income");
   const dispatch = useDispatch();
 
+  // 현재 날짜를 가져오는 함수
   const getDate = useCallback(() => {
     return new Date().toISOString().substring(0, 10);
   }, []);
 
+  // 금액 입력 처리
   const handleAmount = (e) => {
     let isNotNumber = /^[^1-9][^0-9]{0,11}$/g.test(e.target.value)
       ? true
@@ -31,6 +32,7 @@ export default function ExpenseForm({ onSubmit, onClear }) {
     setAmount(addComma(formattedAmount)); // 쉼표 추가
   };
 
+  // 폼 제출 처리
   const handleSubmit = (e) => {
     e.preventDefault();
 

@@ -9,8 +9,7 @@ import DaysHistory from "./DaysHistory";
 import "../scss/main.scss";
 
 export default function Main() {
-  const [income, setIncome] = useState(0); // 수입
-  const [expenditure, setExpenditure] = useState(0); //지출
+  // 상태관리
   const [displayCase, setDisplayCase] = useState(0);
   const [selectedDate, setSelectedDate] = useState(new Date()); // 선택한 날짜 상태
   const [filteredMonthExpenses, setFilteredMonthExpenses] = useState([]);
@@ -19,22 +18,25 @@ export default function Main() {
 
   const dispatch = useDispatch();
 
+  // 이벤트 핸들러: 화면 초기화
   const handleClear = () => {
     setDisplayCase(0);
   };
 
+  // 이벤트 핸들러: 내역 추가
   const handleAddExpense = (expense) => {
     expense.date = selectedDate.toISOString().substring(0, 10);
     dispatch({ type: ADD_EXPENSE, expense });
   };
 
+  // 이벤트 핸들러: 날짜 변경
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
     setDisplayCase(0);
   };
 
   useEffect(() => {
-    // Handle data updates for MonthHistory based on selectedDate
+    // 월별 및 일별 내역 필터링
     const monthExpenses = expenses.filter(
       (expense) =>
         new Date(expense.date).getFullYear() === selectedDate.getFullYear() &&
@@ -42,11 +44,11 @@ export default function Main() {
     );
     setFilteredMonthExpenses(monthExpenses);
 
-    // Handle data updates for DaysHistory based on selectedDate
     const dayExpenses = expenses.filter(
       (expense) =>
         new Date(expense.date).toDateString() === selectedDate.toDateString(),
     );
+    setFilteredMonthExpenses(monthExpenses);
     setFilteredDayExpenses(dayExpenses);
   }, [selectedDate, expenses]);
 
@@ -59,12 +61,7 @@ export default function Main() {
             onDateChange={handleDateChange}
             selectedDate={selectedDate}
           />
-          <ExpenseBox
-            income={income}
-            expenditure={expenditure}
-            className="expenseBox"
-            selectedDate={selectedDate}
-          />
+          <ExpenseBox className="expenseBox" selectedDate={selectedDate} />
           <div className="btnGroup">
             <div
               className="addHistory"
@@ -86,7 +83,7 @@ export default function Main() {
           {displayCase === 0 && (
             <DaysHistory
               selectedDate={selectedDate}
-              expenses={filteredMonthExpenses}
+              expenses={filteredDayExpenses}
             />
           )}
           {displayCase === 1 && (

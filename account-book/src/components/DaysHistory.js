@@ -13,10 +13,11 @@ export default function DaysHistory({ selectedDate }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // 선택한 날짜의 다음 날을 계산하여 날짜 맞춤
     const correctedDate = new Date(selectedDate);
     correctedDate.setDate(selectedDate.getDate() + 1);
 
-    // Handle data updates for DaysHistory based on selectedDate
+    // 선택한 날짜에 해당하는 내역필터링
     const dayExpenses = expenses.filter(
       (expense) =>
         expense.date === correctedDate.toISOString().substring(0, 10),
@@ -24,6 +25,7 @@ export default function DaysHistory({ selectedDate }) {
     setFilteredExpenses(dayExpenses); // filteredExpenses 업데이트
   }, [selectedDate, expenses]);
 
+  // 수입 및 지출 계산
   const totalIncome = filteredExpenses
     .filter((expense) => expense.amountType === "income")
     .reduce((total, expense) => total + expense.amount, 0);
@@ -32,15 +34,19 @@ export default function DaysHistory({ selectedDate }) {
     .filter((expense) => expense.amountType === "expense")
     .reduce((total, expense) => total + expense.amount, 0);
 
+  // 내역 삭제
   const handleRemoveExpense = (id) => {
     dispatch({ type: REMOVE_EXPENSE, id });
   };
 
+  // 내역 수정
   const handleEditExpense = (expense) => {
+    // 모달 열기
     setSelectedExpense(expense);
     setIsEditModalOpen(true);
   };
 
+  // 수정된 내역 저장
   const handleSaveEditedExpense = (updatedExpense) => {
     dispatch({ type: UPDATE_EXPENSE, id: updatedExpense.id, updatedExpense });
     setIsEditModalOpen(false);
@@ -89,6 +95,7 @@ export default function DaysHistory({ selectedDate }) {
       </div>
 
       {isEditModalOpen && (
+        // 모달 열기
         <EditExpenseModal
           expense={selectedExpense}
           onSave={handleSaveEditedExpense}

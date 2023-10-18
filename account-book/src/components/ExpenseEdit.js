@@ -12,6 +12,7 @@ export default function EditExpenseModal({ expense, onSave, onClose }) {
 
   return (
     <div className="edit-expense-modal">
+      {/* 모달 상단 */}
       <div className="top">
         <h2>내역 수정</h2>
         <ClearIcon
@@ -21,6 +22,7 @@ export default function EditExpenseModal({ expense, onSave, onClose }) {
           }}
         />
       </div>
+      {/* 모달 내용 */}
       <div className="main">
         <div>
           <label>제목</label>
@@ -36,7 +38,7 @@ export default function EditExpenseModal({ expense, onSave, onClose }) {
         <div>
           <label>금액</label>
           <input
-            type="text" // type 변경
+            type="text"
             value={updatedExpense.amount}
             onChange={(e) =>
               setUpdatedExpense({

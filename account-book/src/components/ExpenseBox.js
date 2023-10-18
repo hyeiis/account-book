@@ -8,17 +8,18 @@ export default function ExpenseBox({ selectedDate }) {
   const selectedYear = selectedDate.getFullYear();
   const selectedMonth = selectedDate.getMonth() + 1;
 
+  // 선택한 연도 및 월을 "YYYY-MM" 형식으로 표현
   const selectedYearMonth = `${selectedYear}-${String(selectedMonth).padStart(
     2,
     "0",
   )}`;
 
-  // 수입과 지출을 계산합니다
+  // 수입 및 지출 계산
   const totalIncome = expenses
     .filter(
       (expense) =>
         expense.amountType === "income" &&
-        expense.date.substring(0, 7) === selectedYearMonth,
+        expense.date.startsWith(selectedYearMonth),
     )
     .reduce((total, expense) => total + expense.amount, 0);
 
@@ -26,7 +27,7 @@ export default function ExpenseBox({ selectedDate }) {
     .filter(
       (expense) =>
         expense.amountType === "expense" &&
-        expense.date.substring(0, 7) === selectedYearMonth,
+        expense.date.startsWith(selectedYearMonth),
     )
     .reduce((total, expense) => total + expense.amount, 0);
 

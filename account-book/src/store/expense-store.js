@@ -12,6 +12,12 @@ const reducer = (state = [], action) => {
       return [...state, action.expense];
     case REMOVE_EXPENSE:
       return state.filter((expense) => expense.id !== action.id);
+    case UPDATE_EXPENSE:
+      return state.map((expense) =>
+        expense.id === action.id
+          ? { ...expense, ...action.updatedExpense }
+          : expense,
+      );
     default:
       return state;
   }

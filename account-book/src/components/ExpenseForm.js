@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import { ADD_EXPENSE } from "../store/expense-store";
 import ClearIcon from "@mui/icons-material/Clear";
-import { addComma, deleteComma } from "../util/_numberUtils";
+import { enteredOnlyNumber, addComma, deleteComma } from "../util/_numberUtils";
+import { generateUniqueId } from "../util/generateUniqueId";
 import "../scss/expenseForm.scss";
 
 export default function ExpenseForm({ onSubmit, onClear }) {
@@ -25,7 +26,8 @@ export default function ExpenseForm({ onSubmit, onClear }) {
     setIsEnteredWrongAmount(isNotNumber);
     if (isNotNumber) return;
 
-    const formattedAmount = deleteComma(e.target.value); // 쉼표 제거
+    const numericValue = enteredOnlyNumber(e.target.value);
+    const formattedAmount = deleteComma(numericValue); // 쉼표 제거
     setAmount(addComma(formattedAmount)); // 쉼표 추가
   };
 
@@ -33,6 +35,7 @@ export default function ExpenseForm({ onSubmit, onClear }) {
     e.preventDefault();
 
     const enteredData = {
+      id: generateUniqueId(), // 고유 ID 생성
       date,
       title,
       amount: parseFloat(deleteComma(amount)),
@@ -95,6 +98,9 @@ export default function ExpenseForm({ onSubmit, onClear }) {
               maxLength={10}
               required
             />
+            {/* {isEnteredWrongAmount && (
+              <p className="error-message">금액은 10자 이하로 입력하세요.</p>
+            )} */}
           </div>
           <div className="type">
             <label>수입</label>

@@ -78,7 +78,7 @@ export default function ExpenseForm({ onClear }) {
             />
           </div>
           <div>
-            <label>제목</label>
+            <label>내역명</label>
             <input
               type="text"
               value={title}

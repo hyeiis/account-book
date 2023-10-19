@@ -23,63 +23,65 @@ export default function EditExpenseModal({ expense, onSave, onClose }) {
         />
       </div>
       {/* 모달 내용 */}
-      <div className="main">
-        <div>
-          <label>제목</label>
-          <input
-            type="text"
-            value={updatedExpense.title}
-            onChange={(e) =>
-              setUpdatedExpense({ ...updatedExpense, title: e.target.value })
-            }
-            required
-          />
+      <form>
+        <div className="main">
+          <div>
+            <label>내역명</label>
+            <input
+              type="text"
+              value={updatedExpense.title}
+              onChange={(e) =>
+                setUpdatedExpense({ ...updatedExpense, title: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div>
+            <label>금액</label>
+            <input
+              type="text"
+              value={updatedExpense.amount}
+              onChange={(e) =>
+                setUpdatedExpense({
+                  ...updatedExpense,
+                  amount: parseFloat(e.target.value),
+                })
+              }
+              maxLength={10}
+              required
+            />
+          </div>
+          <div className="type">
+            <label>수입</label>
+            <input
+              type="radio"
+              name="type"
+              value="income"
+              checked={updatedExpense.amountType === "income"}
+              onChange={() =>
+                setUpdatedExpense({
+                  ...updatedExpense,
+                  amountType: "income",
+                })
+              }
+            />
+            <label>지출</label>
+            <input
+              type="radio"
+              name="type"
+              value="expense"
+              checked={updatedExpense.amountType === "expense"}
+              onChange={() =>
+                setUpdatedExpense({
+                  ...updatedExpense,
+                  amountType: "expense",
+                })
+              }
+            />
+          </div>
+          <button onClick={handleSave}>완료</button>
         </div>
-        <div>
-          <label>금액</label>
-          <input
-            type="text"
-            value={updatedExpense.amount}
-            onChange={(e) =>
-              setUpdatedExpense({
-                ...updatedExpense,
-                amount: parseFloat(e.target.value),
-              })
-            }
-            maxLength={10}
-            required
-          />
-        </div>
-        <div className="type">
-          <label>수입</label>
-          <input
-            type="radio"
-            name="type"
-            value="income"
-            checked={updatedExpense.amountType === "income"}
-            onChange={() =>
-              setUpdatedExpense({
-                ...updatedExpense,
-                amountType: "income",
-              })
-            }
-          />
-          <label>지출</label>
-          <input
-            type="radio"
-            name="type"
-            value="expense"
-            checked={updatedExpense.amountType === "expense"}
-            onChange={() =>
-              setUpdatedExpense({
-                ...updatedExpense,
-                amountType: "expense",
-              })
-            }
-          />
-        </div>
-        <button onClick={handleSave}>완료</button>
-      </div>
+      </form>
     </div>
   );
 }
